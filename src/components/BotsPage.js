@@ -11,14 +11,21 @@ function BotsPage() {
     fetch('http://localhost:8002/bots')
     .then(r => r.json())
     .then(data => setBots(data))
-  })
+  }, [])
 
-  console.log(bots)
+  function handleDeletedBot(deletedBot) {
+    const updatedBots = bots.filter((robot) => robot.id !== deletedBot.id)
+    setBots(updatedBots)
+  }
+
 
   return (
     <div>
       <YourBotArmy />
-      <BotCollection bots={bots}/>
+      <BotCollection 
+        bots={bots}
+        onDelete={handleDeletedBot}
+        />
     </div>
   )
 }

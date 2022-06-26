@@ -1,13 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import BotCard from "./BotCard"
 
-function BotCollection({bots}) {
+
+function BotCollection({bots, onDelete}) {
   // Your code here
+  
+
+  // () => {
+  //   
+
   return (
     <div className="ui four column grid">
       <div className="row">
-        {bots.map((data) => {
-          <BotCard bot={data}/>
+        {bots.map(function (data) {
+          return (
+            <BotCard 
+              bot={data}
+              onDelete={onDelete}
+              />
+          )
         })}
         Collection of all bots
       </div>
