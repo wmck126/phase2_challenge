@@ -2,12 +2,9 @@ import React, { useEffect } from "react";
 import BotCard from "./BotCard"
 
 
-function BotCollection({bots, onDelete}) {
-  // Your code here
+function BotCollection({bots, onDelete, onAddArmy}) {
   
-
-  // () => {
-  //   
+  
 
   return (
     <div className="ui four column grid">
@@ -17,6 +14,7 @@ function BotCollection({bots, onDelete}) {
             <BotCard 
               bot={data}
               onDelete={onDelete}
+              onAddArmy={onAddArmy}
               />
           )
         })}
