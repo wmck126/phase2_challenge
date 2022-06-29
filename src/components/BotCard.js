@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 const botTypeClasses = {
   Assault: "icon military",
@@ -9,7 +9,7 @@ const botTypeClasses = {
   Captain: "icon star",
 };
 
-function BotCard({ bot, onDelete, onAddArmy }) {
+function BotCard({ bot, onDelete, onAddArmy, key}) {
   
   const deleteBot = () => {
     fetch(`http://localhost:8002/bots/${bot.id}`,{
@@ -18,16 +18,13 @@ function BotCard({ bot, onDelete, onAddArmy }) {
     .then(() => onDelete(bot)) 
   }
 
-  function handleMoveClick () {
-    onAddArmy(bot)
-  }
 
   return (
     <div className="ui column">
       <div
         className="ui card"
-        key={bot.id}
-        onClick={handleMoveClick}
+        key={key}
+        onClick={() => onAddArmy(bot.id)}
       >
         <div className="image">
           <img alt="oh no!" src={bot.avatar_url} />

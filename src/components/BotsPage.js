@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import YourBotArmy from "./YourBotArmy";
 import BotCollection from "./BotCollection";
 
+
 function BotsPage() {
   //start here with your code for step one
 
@@ -18,21 +19,28 @@ function BotsPage() {
     const updatedBots = bots.filter((robot) => robot.id !== deletedBot.id)
     setBots(updatedBots)
   }
-
+  
   function handleBotArmy(addedBot) {
-    console.log("Added to army", addedBot)
-    // const updatedBots = bots.filter((addBot) => addBot.id !== addedBot.id)
-    // setBots(updatedBots)
-    
+    for (const i of botArmy) {
+      if (i === addedBot) return (alert("Can only add the same robot once!"))
+    }
     setBotArmy([...botArmy, addedBot])
-    
   }
 
-  console.log("bots in the army: ",botArmy)
+  function takeOutOfService(badBot) {
+    setBotArmy(botArmy.filter(bot => (bot !== badBot)))
+  }
+
+  const filteredBots = bots.filter(bot => {
+    for (const i of botArmy) {
+      if (i === bot.id) return true
+    }
+    return false
+  })
 
   return (
     <div>
-      <YourBotArmy botArmy={botArmy}/>
+      <YourBotArmy botArmy={filteredBots} takeOutOfService={takeOutOfService}/>
       <BotCollection 
         bots={bots}
         onDelete={handleDeletedBot}

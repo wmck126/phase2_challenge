@@ -1,24 +1,22 @@
-import React, { useEffect } from "react";
+import React from "react";
 import BotCard from "./BotCard"
 
 
 function BotCollection({bots, onDelete, onAddArmy}) {
-  
-  
+
+  const botLineup = bots.map(bot => (
+    <BotCard 
+      bot={bot}
+      key={bot.id}
+      onDelete={onDelete}
+      onAddArmy={onAddArmy}
+      />
+  ))
 
   return (
     <div className="ui four column grid">
       <div className="row">
-        {bots.map(function (data) {
-          return (
-            <BotCard 
-              bot={data}
-              onDelete={onDelete}
-              onAddArmy={onAddArmy}
-              />
-          )
-        })}
-        Collection of all bots
+        {botLineup}
       </div>
     </div>
   );
